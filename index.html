@@ -132,8 +132,8 @@
                         <div class="p-4 text-center border-2 border-gray-100 rounded-2xl font-bold text-gray-500 group-hover:bg-gray-50 peer-checked:border-burgundy peer-checked:bg-red-50 peer-checked:text-burgundy transition-all">Kunduzgi</div>
                     </label>
                     <label class="relative cursor-pointer group">
-                        <input type="radio" name="studyType" value="Onlayn" required class="peer hidden">
-                        <div class="p-4 text-center border-2 border-gray-100 rounded-2xl font-bold text-gray-500 group-hover:bg-gray-50 peer-checked:border-burgundy peer-checked:bg-red-50 peer-checked:text-burgundy transition-all">Onlayn</div>
+                        <input type="radio" name="studyType" value="Masofaviy" required class="peer hidden">
+                        <div class="p-4 text-center border-2 border-gray-100 rounded-2xl font-bold text-gray-500 group-hover:bg-gray-50 peer-checked:border-burgundy peer-checked:bg-red-50 peer-checked:text-burgundy transition-all">Masofaviy</div>
                     </label>
                 </div>
             </div>
@@ -454,7 +454,7 @@
                 
                 document.getElementById('testSection').classList.add('hidden');
                 document.getElementById('resultSection').classList.remove('hidden');
-                document.getElementById('successMsg').innerHTML = `Hurmatli <b>${userData.fullName.split(' ')[0]}</b>, siz institutning <b>${userData.major}</b> (${userData.studyType}) yo'nalishiga muvaffaqiyatli qabul qilindingiz!`;
+                document.getElementById('successMsg').innerHTML = `Hurmatli <b>${userData.fullName.split(' ')[0]}</b>, siz institutning <b>${userData.major}</b> (${userData.studyType}) yo'nalishiga muvaffaqiyatli talabalikka qabul qilindingiz!`;
                 window.scrollTo(0, 0);
             } catch (e) { alert("Xatolik. Internetni tekshiring."); btn.disabled = false; }
         };
