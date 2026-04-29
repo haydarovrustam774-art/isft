@@ -76,7 +76,6 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <!-- Viloyatlar ro'yxati -->
                 <div class="space-y-2">
                     <label class="block text-sm font-semibold text-gray-700">2. Viloyat <span class="text-red-500">*</span></label>
                     <select id="regionSelect" name="region" required class="w-full p-3 border border-gray-300 rounded-lg form-input bg-white text-sm">
@@ -97,7 +96,6 @@
                         <option>Toshkent shahri</option>
                     </select>
                 </div>
-                <!-- Dinamik tumanlar -->
                 <div class="space-y-2">
                     <label class="block text-sm font-semibold text-gray-700">Tuman (Shahar) <span class="text-red-500">*</span></label>
                     <select id="districtSelect" name="district" required class="w-full p-3 border border-gray-300 rounded-lg form-input bg-white text-sm">
@@ -165,7 +163,7 @@
         <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl">
             <h3 class="text-lg font-bold text-[#8b003d] mb-4">✨ AI Yo'nalish Maslahatchisi</h3>
             <p class="text-sm text-gray-600 mb-4">Qaysi sohalarga qiziqishingizni yozing va AI sizga mos yo'nalishni tavsiya qiladi.</p>
-            <textarea id="aiInterests" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-[#8b003d] outline-none text-sm h-32" placeholder="Masalan: 'Menga iqtisod va moliya sohasidagi raqamlar bilan ishlash yoqadi...'"></textarea>
+            <textarea id="aiInterests" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-[#8b003d] outline-none text-sm h-32" placeholder="Masalan: 'Menga raqamlar bilan ishlash yoqadi...'"></textarea>
             <div id="aiCounselorResult" class="mt-4 p-3 bg-red-50 border border-red-100 rounded-lg text-sm text-gray-700 hidden italic"></div>
             <div class="mt-6 flex gap-2">
                 <button id="aiConsultBtn" onclick="consultAI()" class="flex-1 gradient-bg text-white py-2 rounded-lg font-bold text-sm">✨ Maslahat olish</button>
@@ -209,15 +207,15 @@
                     <h2 class="text-4xl font-black text-[#5c0028] mb-2 uppercase tracking-tight">Tabriklaymiz!</h2>
                     <div class="h-1 w-24 gradient-bg mx-auto mb-6 rounded-full"></div>
                     
-                    <p class="text-2xl font-bold text-gray-800 leading-tight px-4">
-                        Siz <span class="text-[#8b003d] uppercase underline text-center block mt-2">INTERNATIONAL SCHOOL OF FINANCE TECHNOLOGY AND SCIENCE</span> Institutiga muvaffaqiyatli qabul qilindingiz!
+                    <p class="text-2xl font-bold text-gray-800 leading-tight px-4 text-center">
+                        Siz <span class="text-[#8b003d] uppercase underline">INTERNATIONAL SCHOOL OF FINANCE TECHNOLOGY AND SCIENCE</span> Institutiga muvaffaqiyatli qabul qilindingiz!
                     </p>
                     
                     <div class="space-y-6 text-gray-600 max-w-md mx-auto pt-6">
                         <p id="congratsText" class="italic text-lg"></p>
                         
-                        <div class="pt-8 border-t border-gray-100">
-                            <p class="text-xs font-bold text-gray-400 uppercase mb-4 tracking-widest">Keyingi bosqichlar</p>
+                        <div class="pt-8 border-t border-gray-100 text-center">
+                            <p class="text-xs font-bold text-gray-400 uppercase mb-4 tracking-widest text-center">Keyingi bosqichlar</p>
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left">
                                 <div class="bg-[#fff0f5] p-4 rounded-xl text-[12px] flex items-center border border-[#ffc1da]">
                                     <i class="fa-solid fa-file-signature text-[#8b003d] text-lg mr-3"></i> 
@@ -231,7 +229,7 @@
                         </div>
                     </div>
 
-                    <div class="mt-12">
+                    <div class="mt-12 text-center">
                         <button onclick="location.reload()" class="px-12 py-4 gradient-bg text-white rounded-2xl font-bold shadow-xl hover:scale-105 transition-transform">
                             Asosiy sahifa
                         </button>
@@ -249,15 +247,13 @@
         import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 
         const scriptURL = 'https://script.google.com/macros/s/AKfycbxonmVFGH9gTsQHyhJPyYykE5k1357KcRnRJkeMzFSPJlqa8ewKfF1EBl-Qo832j-21/exec';
-        const firebaseConfig = JSON.parse(__firebase_config);
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'isft-admission';
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-        const auth = getAuth(app);
         const apiKey = ""; 
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'isft-admission';
 
         let user = null;
         let userData = {};
+        let db = null;
+        let auth = null;
 
         // HUDUDLAR MA'LUMOTI
         const regionsData = {
@@ -273,7 +269,7 @@
             "Sirdaryo viloyati": ["Guliston shahri", "Yangiyer shahri", "Shirin shahri", "Boyovut tumani", "Guliston tumani", "Mirzaobod tumani", "Oqoltin tumani", "Sardoba tumani", "Sayxunobod tumani", "Sirdaryo tumani", "Xovos tumani"],
             "Toshkent viloyati": ["Bekobod shahri", "Olmaliq shahri", "Ohangaron shahri", "Nurafshon shahri", "Chirchiq shahri", "Yangiyo‘l shahri", "Bekobod tumani", "Bo‘ka tumani", "Bo‘stonliq tumani", "Qibray tumani", "Quyi Chirchiq tumani", "Oqqo‘rg‘on tumani", "Ohangaron tumani", "Parkent tumani", "Piskent tumani", "Toshkent tumani", "Zangiota tumani", "O‘rta Chirchiq tumani", "Chinoz tumani", "Yuqori chirchiq tumani", "Yangiyo‘l tumani"],
             "Farg‘ona viloyati": ["Farg‘ona shahri", "Marg‘ilon shahri", "Quvasoy shahri", "Qo‘qon shahri", "Beshariq tumani", "Bog‘dod tumani", "Buvayda tumani", "Dang‘ara tumani", "Yozyovon tumani", "Quva tumani", "Qo‘shtepa tumani", "Oltiariq tumani", "Rishton tumani", "So‘x tumani", "Toshloq tumani", "O‘zbekiston tumani", "Uchko‘prik tumani", "Farg‘ona tumani", "Furqat tumani"],
-            "Xorizm viloyati": ["Urganch shahri", "Xiva shahri", "Bog‘ot tumani", "Gurlan tumani", "Urganch tumani", "Xiva tumani", "Xonqa tumani", "Hazorasp tumani", "Shovot tumani", "Yangiariq tumani", "Yangibozor tumani", "Qo‘shko‘pir tumani"],
+            "Xorazm viloyati": ["Urganch shahri", "Xiva shahri", "Bog‘ot tumani", "Gurlan tumani", "Urganch tumani", "Xiva tumani", "Xonqa tumani", "Hazorasp tumani", "Shovot tumani", "Yangiariq tumani", "Yangibozor tumani", "Qo‘shko‘pir tumani"],
             "Toshkent shahri": ["Bektemir tumani", "Mirzo Ulug‘bek tumani", "Mirobod tumani", "Olmazor tumani", "Sirg‘ali tumani", "Uchtepa tumani", "Chilonzor tumani", "Shayxontohur tumani", "Yunusobod tumani", "Yakkasaroy tumani", "Yashnobod tumani"]
         };
 
@@ -284,7 +280,6 @@
         regionSelect.addEventListener('change', (e) => {
             const selectedRegion = e.target.value;
             districtSelect.innerHTML = '<option value="">Tanlang...</option>';
-            
             if (selectedRegion && regionsData[selectedRegion]) {
                 regionsData[selectedRegion].forEach(district => {
                     const option = document.createElement('option');
@@ -297,31 +292,42 @@
             }
         });
 
-        const initAuth = async () => {
-            try {
-                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                    await signInWithCustomToken(auth, __initial_auth_token);
-                } else {
-                    await signInAnonymously(auth);
-                }
-            } catch (err) { console.error("Auth error:", err); }
-        };
+        // FIREBASE INITIALIZATION WITH SAFETY
+        try {
+            if (typeof __firebase_config !== 'undefined') {
+                const firebaseConfig = JSON.parse(__firebase_config);
+                const app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                auth = getAuth(app);
 
-        onAuthStateChanged(auth, (u) => { user = u; });
-        initAuth();
+                const initAuth = async () => {
+                    if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                        await signInWithCustomToken(auth, __initial_auth_token);
+                    } else {
+                        await signInAnonymously(auth);
+                    }
+                };
+                onAuthStateChanged(auth, (u) => { user = u; });
+                initAuth();
+            }
+        } catch (e) {
+            console.warn("Firebase not initialized. Data will only be sent to Google Sheets.");
+        }
 
         async function callGemini(prompt, systemPrompt = "") {
-            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
-            const response = await fetch(url, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    contents: [{ parts: [{ text: prompt }] }],
-                    systemInstruction: { parts: [{ text: systemPrompt }] }
-                })
-            });
-            const result = await response.json();
-            return result.candidates?.[0]?.content?.parts?.[0]?.text;
+            try {
+                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: prompt }] }],
+                        systemInstruction: { parts: [{ text: systemPrompt }] }
+                    })
+                });
+                const result = await response.json();
+                return result.candidates?.[0]?.content?.parts?.[0]?.text || "Maslahat olib bo'lmadi.";
+            } catch (err) { return "AI xizmati hozircha mavjud emas."; }
         }
 
         window.openAICounselor = () => document.getElementById('aiCounselorModal').classList.remove('hidden');
@@ -339,18 +345,12 @@
             btn.disabled = true;
             btn.innerHTML = '<div class="loader"></div> Oylamoqda...';
             resultBox.classList.add('hidden');
-            const sysPrompt = "Siz ISFT instituti qabul maslahatchisisiz. Mavjud yo'nalishlar asosida nomzodga qiziqishlariga mosini tavsiya qiling.";
-            try {
-                const response = await callGemini(`Mening qiziqishlarim: ${interests}. Menga qaysi yo'nalish mos?`, sysPrompt);
-                resultBox.innerText = response;
-                resultBox.classList.remove('hidden');
-            } catch (err) {
-                resultBox.innerText = "Sun'iy intellekt xizmati band.";
-                resultBox.classList.remove('hidden');
-            } finally {
-                btn.disabled = false;
-                btn.innerHTML = '✨ Maslahat olish';
-            }
+            const sysPrompt = "Siz ISFT instituti qabul maslahatchisisiz. Nomzodga uning qiziqishlari asosida yo'nalish tavsiya qiling.";
+            const response = await callGemini(`Mening qiziqishlarim: ${interests}. Menga qaysi yo'nalish mos?`, sysPrompt);
+            resultBox.innerText = response;
+            resultBox.classList.remove('hidden');
+            btn.disabled = false;
+            btn.innerHTML = '✨ Maslahat olish';
         };
 
         const questionsBank = {
@@ -361,7 +361,7 @@
                 { q: "Trigonometriyada burchakning sinusi deb nimaga aytiladi?", options: ["Qarshisidagi katetning gipotenuzaga nisbatiga", "Yopishgan katetning gipotenuzaga nisbatiga", "Ikki katetning o'zaro nisbatiga"], correct: 0 },
                 { q: "Vektorlar qachon qarama-qarshi yo'nalgan deyiladi?", options: ["Ular parallel va yo'nalishlari bir xil bo'lsa", "Ular parallel bo'lib, yo'nalishlari qarama-qarshi bo'lsa", "Ular o'zaro perpendikulyar bo'lsa"], correct: 1 },
                 { q: "Geometrik progressiyaning mahraji ($q$) birga teng bo‘lsa, u qanday progressiya bo‘ladi?", options: ["O‘suvchi", "O‘zgarmas (statsionar)", "Cheksiz kamayuvchi"], correct: 1 },
-                { q: "Sinuslar teoremasi asosan qanday maqsadlarda qo‘llaniladi?", options: ["Faqat to'g'ri burchakli uchburchaklarni yechishda", "Ixtiyoriy uchburchakning tomonlari va burchaklarini topishda", "Faqat yuzani hisoblashda"], correct: 1 },
+                { q: "Sinuslar teoremasi asosan qanday maqsadlarda qo‘llaniladi?", options: ["Faqa to'g'ri burchakli uchburchaklarni yechishda", "Ixtiyoriy uchburchakning tomonlari va burchaklarini topishda", "Faqat yuzani hisoblashda"], correct: 1 },
                 { q: "Agar vektorlarning skalyar ko‘paytmasi nolga teng bo‘lsa, bu vektorlar qanday joylashgan?", options: ["Parallel", "Ustma-ust", "Perpendikulyar"], correct: 2 },
                 { q: "Kvadrat tenglamaning diskriminanti noldan kichik bo‘lsa, u nechta haqiqiy ildizga ega?", options: ["Ildizga ega emas", "Bitta ildizga ega", "Ikkita ildizga ega"], correct: 0 },
                 { q: "Doira va aylananing farqi nimada?", options: ["Farqi yo'q, ikkalasi bir xil narsa", "Aylana — bu chiziq, doira — tekislikning aylana bilan chegaralangan qismi", "Aylana ichi to'la shakl, doira esa bo'sh chiziq"], correct: 1 },
@@ -494,28 +494,34 @@
         document.getElementById('finishTestBtn').addEventListener('click', async () => {
             const answers = qContainer.querySelectorAll('input[type="radio"]:checked');
             if (answers.length < 15) { alert("Iltimos, barcha savollarga javob bering!"); return; }
-            if (!user) await initAuth();
-            if (!user) return alert("Xatolik: Autentifikatsiya.");
+            
             document.getElementById('finishTestBtn').disabled = true;
             document.getElementById('finishTestBtn').innerText = "Natijalar yuborilmoqda...";
+            
             let score = 0;
             answers.forEach(ans => {
                 const qIdx = parseInt(ans.name.split('-')[1]);
                 if (parseInt(ans.value) === selectedQuestions[qIdx].correct) score++;
             });
+
             const cleanPhone = (p) => p.replace('+', '').replace(/\s/g, '').replace(/-/g, '').trim();
             const finalData = {
                 ...userData,
                 studentPhone: cleanPhone(userData.studentPhone),
                 parentPhone: cleanPhone(userData.parentPhone),
                 score: score,
-                timestamp: serverTimestamp()
+                timestamp: new Date().toISOString()
             };
+
             try {
-                await Promise.all([
-                    fetch(scriptURL, { method: 'POST', body: new URLSearchParams(finalData) }),
-                    addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'applications'), finalData)
-                ]);
+                // Parallel submission
+                const submissions = [fetch(scriptURL, { method: 'POST', body: new URLSearchParams(finalData) })];
+                if (db) {
+                    submissions.push(addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'applications'), finalData));
+                }
+                
+                await Promise.all(submissions);
+
                 testSection.classList.add('hidden');
                 resultSection.classList.remove('hidden');
                 const firstName = userData.fullName.split(' ')[1] || userData.fullName.split(' ')[0];
@@ -524,7 +530,7 @@
                 window.scrollTo(0, 0);
             } catch (err) {
                 console.error(err);
-                alert("Xatolik yuz berdi.");
+                alert("Natijalarni saqlashda xatolik yuz berdi.");
                 document.getElementById('finishTestBtn').disabled = false;
             }
         });
