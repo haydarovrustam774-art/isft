@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INTERNATIONAL SCHOOL OF FINANCE TECHNOLOGY AND SCIENCE - Qabul</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #fcf8f9; }
+        
+        .gradient-bg { 
+            background: linear-gradient(135deg, #5c0028 0%, #8b003d 100%); 
+        }
+        
+        .form-input:focus { 
+            border-color: #8b003d; 
+            box-shadow: 0 0 0 3px rgba(139, 0, 61, 0.2); 
+            outline: none; 
+        }
+        
+        .test-card { transition: all 0.3s ease; }
+        .test-option:hover { background-color: #fff0f5; }
+        input[type="radio"]:checked + label { 
+            background-color: #8b003d; 
+            color: white; 
+            border-color: #5c0028; 
+        }
+        
+        @keyframes fadeInScale {
+            0% { opacity: 0; transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        .animate-acceptance { animation: fadeInScale 0.6s ease-out forwards; }
+        
+        .confetti-piece {
+            position: absolute; width: 10px; height: 10px; background: #ffd700; top: -10px;
+            opacity: 0; animation: confetti-fall 3s linear infinite;
+        }
+        @keyframes confetti-fall {
+            0% { top: -10px; opacity: 1; transform: translateX(0) rotate(0deg); }
+            100% { top: 100vh; opacity: 0; transform: translateX(100px) rotate(360deg); }
+        }
+
+        .loader {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #8b003d;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center py-8 px-4 relative overflow-x-hidden">
+
+    <div class="max-w-2xl w-full mb-6 text-center">
+        <h1 class="text-2xl font-bold text-[#5c0028] leading-tight uppercase">International School of Finance Technology and Science</h1>
+        <p class="text-gray-600 mt-2">Qabul komissiyasi va kirish imtihonlari</p>
+    </div>
+
+    <!-- 1-BOSQICH: RO'YXATDAN O'TISH -->
+    <div id="registrationSection" class="max-w-2xl w-full bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-100">
+        <div class="gradient-bg p-6 text-white text-center">
+            <h2 class="text-xl font-bold">Ro'yxatdan o'tish</h2>
+            <p class="text-pink-100 text-sm">Ma'lumotlaringizni kiriting va testni boshlang</p>
+        </div>
+
+        <form id="registrationForm" class="p-8 space-y-6">
+            <div class="space-y-2">
+                <label class="block text-sm font-semibold text-gray-700">1. I.F.SH. <span class="text-red-500">*</span></label>
+                <input type="text" name="fullName" required placeholder="Xaydarov Rustambek Yulchibayevich" class="w-full p-3 border border-gray-300 rounded-lg form-input">
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Viloyatlar ro'yxati -->
+                <div class="space-y-2">
+                    <label class="block text-sm font-semibold text-gray-700">2. Viloyat <span class="text-red-500">*</span></label>
+                    <select id="regionSelect" name="region" required class="w-full p-3 border border-gray-300 rounded-lg form-input bg-white text-sm">
+                        <option value="">Tanlang...</option>
+                        <option>Qoraqalpog‘iston Respublikasi</option>
+                        <option>Andijon viloyati</option>
+                        <option>Buxoro viloyati</option>
+                        <option>Jizzax viloyati</option>
+                        <option>Qashqadaryo viloyati</option>
+                        <option>Navoiy viloyati</option>
+                        <option>Namangan viloyati</option>
+                        <option>Samarqand viloyati</option>
+                        <option>Surxondaryo viloyati</option>
+                        <option>Sirdaryo viloyati</option>
+                        <option>Toshkent viloyati</option>
+                        <option>Farg‘ona viloyati</option>
+                        <option>Xorazm viloyati</option>
+                        <option>Toshkent shahri</option>
+                    </select>
+                </div>
+                <!-- Dinamik tumanlar -->
+                <div class="space-y-2">
+                    <label class="block text-sm font-semibold text-gray-700">Tuman (Shahar) <span class="text-red-500">*</span></label>
+                    <select id="districtSelect" name="district" required class="w-full p-3 border border-gray-300 rounded-lg form-input bg-white text-sm">
+                        <option value="">Avval viloyatni tanlang...</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="space-y-2">
+                <label class="block text-sm font-semibold text-gray-700">3. Maktab/Muassasa nomi <span class="text-red-500">*</span></label>
+                <input type="text" name="school" required placeholder="Masalan: 14-maktab" class="w-full p-3 border border-gray-300 rounded-lg form-input">
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="space-y-2">
+                    <label class="block text-sm font-semibold text-gray-700">4. Telefon raqamingiz <span class="text-red-500">*</span></label>
+                    <input type="tel" id="studentPhone" name="studentPhone" required placeholder="+998" class="w-full p-3 border border-gray-300 rounded-lg form-input">
+                </div>
+                <div class="space-y-2">
+                    <label class="block text-sm font-semibold text-gray-700">5. Ota-ona telefon raqami <span class="text-red-500">*</span></label>
+                    <input type="tel" id="parentPhone" name="parentPhone" required placeholder="+998" class="w-full p-3 border border-gray-300 rounded-lg form-input">
+                </div>
+            </div>
+
+            <div class="space-y-2">
+                <label class="block text-sm font-semibold text-gray-700">6. Pasport seriya va raqami <span class="text-red-500">*</span></label>
+                <input type="text" id="passport" name="passport" required placeholder="AB1234567" class="w-full p-3 border border-gray-300 rounded-lg form-input uppercase">
+            </div>
+
+            <div class="space-y-4">
+                <div class="flex justify-between items-center">
+                    <label class="block text-sm font-semibold text-gray-700">7. Yo'nalish <span class="text-red-500">*</span></label>
+                    <button type="button" onclick="openAICounselor()" class="text-xs text-[#8b003d] font-bold hover:underline flex items-center gap-1">
+                        ✨ Yo'nalish tanlashda yordam (AI)
+                    </button>
+                </div>
+                <select id="majorSelect" name="major" required class="w-full p-3 border border-gray-300 rounded-lg form-input bg-white text-sm">
+                    <option value="">Tanlang...</option>
+                    <option>Pedagogika</option><option>Maktabgacha ta'lim</option><option>Boshlang'ich ta'lim</option>
+                    <option>Psixologiya</option><option>Xorijiy tel va adabiyoti: ingliz tili</option><option>Filologiya va tillarni o'qitish</option>
+                    <option>Iqtisodiyot</option><option>Bank ishi</option><option>Marketing</option>
+                    <option>Axborot xavfsizligi</option><option>Axborot tizimlari va texnologiyalari</option><option>Xalqaro munosabatlar</option>
+                    <option>UOS BA (Hons) International Applied Accounting</option><option>UOS BA (Hons) Business and Management</option>
+                    <option>Management and Managerial Accounting</option>
+                </select>
+            </div>
+
+            <div class="space-y-2">
+                <label class="block text-sm font-semibold text-gray-700">8. Ta'lim turi <span class="text-red-500">*</span></label>
+                <select name="studyType" required class="w-full p-3 border border-gray-300 rounded-lg form-input bg-white text-sm">
+                    <option value="">Tanlang...</option>
+                    <option value="Kunduzgi">Kunduzgi</option>
+                    <option value="Onlayn">Onlayn</option>
+                </select>
+            </div>
+
+            <button type="submit" class="w-full py-4 gradient-bg text-white font-bold rounded-lg shadow-lg hover:opacity-90 transition-all flex items-center justify-center gap-2">
+                <i class="fa-solid fa-play"></i> Testni boshlash
+            </button>
+        </form>
+    </div>
+
+    <!-- AI COUNSELOR MODAL -->
+    <div id="aiCounselorModal" class="fixed inset-0 bg-black/50 z-[110] hidden flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl">
+            <h3 class="text-lg font-bold text-[#8b003d] mb-4">✨ AI Yo'nalish Maslahatchisi</h3>
+            <p class="text-sm text-gray-600 mb-4">Qaysi sohalarga qiziqishingizni yozing va AI sizga mos yo'nalishni tavsiya qiladi.</p>
+            <textarea id="aiInterests" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-[#8b003d] outline-none text-sm h-32" placeholder="Masalan: 'Menga iqtisod va moliya sohasidagi raqamlar bilan ishlash yoqadi...'"></textarea>
+            <div id="aiCounselorResult" class="mt-4 p-3 bg-red-50 border border-red-100 rounded-lg text-sm text-gray-700 hidden italic"></div>
+            <div class="mt-6 flex gap-2">
+                <button id="aiConsultBtn" onclick="consultAI()" class="flex-1 gradient-bg text-white py-2 rounded-lg font-bold text-sm">✨ Maslahat olish</button>
+                <button onclick="closeAICounselor()" class="flex-1 bg-gray-100 text-gray-600 py-2 rounded-lg font-bold text-sm">Yopish</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2-BOSQICH: TEST JARAYONI -->
+    <div id="testSection" class="max-w-3xl w-full bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-100 hidden">
+        <div class="gradient-bg p-6 text-white flex justify-between items-center">
+            <h2 class="text-xl font-bold">Kirish Testi</h2>
+            <div id="timer" class="bg-white/20 px-4 py-1 rounded-full text-sm font-mono">15:00</div>
+        </div>
+        
+        <div class="p-4 bg-[#fff0f5] border-b text-xs text-[#8b003d] flex justify-between">
+            <span>Savollar: 15 ta</span>
+            <span id="progressText">Jarayon: 0/15</span>
+        </div>
+
+        <div id="questionsContainer" class="p-8 space-y-12 max-h-[70vh] overflow-y-auto"></div>
+
+        <div class="p-6 border-t bg-gray-50 text-center">
+            <button id="finishTestBtn" class="bg-[#8b003d] text-white px-10 py-3 rounded-lg font-bold shadow-lg hover:bg-[#5c0028] transition-all">
+                Testni yakunlash
+            </button>
+        </div>
+    </div>
+
+    <!-- 3-BOSQICH: NATIJA -->
+    <div id="resultSection" class="max-w-2xl w-full hidden">
+        <div class="bg-white rounded-3xl shadow-2xl overflow-hidden border-8 border-[#fff0f5] p-1 animate-acceptance">
+            <div class="border-2 border-dashed border-[#ffc1da] rounded-2xl p-8 md:p-12 text-center space-y-8 relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-32 h-32 bg-[#fff0f5] rounded-full -translate-x-16 -translate-y-16"></div>
+                <div class="absolute bottom-0 right-0 w-32 h-32 bg-[#fff0f5] rounded-full translate-x-16 translate-y-16"></div>
+
+                <div class="relative z-10">
+                    <div class="w-24 h-24 bg-green-50 text-green-700 rounded-full flex items-center justify-center mx-auto text-5xl mb-6 shadow-inner">
+                        <i class="fa-solid fa-award"></i>
+                    </div>
+                    <h2 class="text-4xl font-black text-[#5c0028] mb-2 uppercase tracking-tight">Tabriklaymiz!</h2>
+                    <div class="h-1 w-24 gradient-bg mx-auto mb-6 rounded-full"></div>
+                    
+                    <p class="text-2xl font-bold text-gray-800 leading-tight px-4">
+                        Siz <span class="text-[#8b003d] uppercase underline text-center block mt-2">INTERNATIONAL SCHOOL OF FINANCE TECHNOLOGY AND SCIENCE</span> Institutiga muvaffaqiyatli qabul qilindingiz!
+                    </p>
+                    
+                    <div class="space-y-6 text-gray-600 max-w-md mx-auto pt-6">
+                        <p id="congratsText" class="italic text-lg"></p>
+                        
+                        <div class="pt-8 border-t border-gray-100">
+                            <p class="text-xs font-bold text-gray-400 uppercase mb-4 tracking-widest">Keyingi bosqichlar</p>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left">
+                                <div class="bg-[#fff0f5] p-4 rounded-xl text-[12px] flex items-center border border-[#ffc1da]">
+                                    <i class="fa-solid fa-file-signature text-[#8b003d] text-lg mr-3"></i> 
+                                    <span>Shartnoma rasmiylashtirish uchun komissiyaga murojaat qiling</span>
+                                </div>
+                                <div class="bg-[#fff0f5] p-4 rounded-xl text-[12px] flex items-center border border-[#ffc1da]">
+                                    <i class="fa-solid fa-calendar-check text-[#8b003d] text-lg mr-3"></i> 
+                                    <span>O'quv mashg'ulotlari sentabr oyidan boshlanadi</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-12">
+                        <button onclick="location.reload()" class="px-12 py-4 gradient-bg text-white rounded-2xl font-bold shadow-xl hover:scale-105 transition-transform">
+                            Asosiy sahifa
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="confettiContainer" class="fixed inset-0 pointer-events-none z-[100]"></div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxonmVFGH9gTsQHyhJPyYykE5k1357KcRnRJkeMzFSPJlqa8ewKfF1EBl-Qo832j-21/exec';
+        const firebaseConfig = JSON.parse(__firebase_config);
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'isft-admission';
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+        const apiKey = ""; 
+
+        let user = null;
+        let userData = {};
+
+        // HUDUDLAR MA'LUMOTI
+        const regionsData = {
+            "Qoraqalpog‘iston Respublikasi": ["Nukus shahri", "Amudaryo tumani", "Beruniy tumani", "Kegeyli tumani", "Qanliko‘l tumani", "Qorao‘zak tumani", "Qo‘ng‘irot tumani", "Mo‘ynoq tumani", "Nukus tumani", "Taxiatosh tumani", "Taxtako‘pir tumani", "To‘rtko‘l tumani", "Xo‘jayli tumani", "Chimboy tumani", "Sho‘manoy tumani", "Ellikqal’a tumani"],
+            "Andijon viloyati": ["Andijon shahri", "Xonabod shahri", "Andijon tumani", "Asaka tumani", "Baliqchi tumani", "Bo‘z tumani", "Buloqboshi tumani", "Jalaquduq tumani", "Izboskan tumani", "Qo‘rg‘ontepa tumani", "Marhamat tumani", "Oltinko‘l tumani", "Paxtaobod tumani", "Ulug‘nor tumani", "Xo‘jaobod tumani", "Shahrixon tumani"],
+            "Buxoro viloyati": ["Buxoro shahri", "Kogon shahri", "Buxoro tumani", "Vobkent tumani", "Jondor tumani", "Kogon tumani", "Olot tumani", "Peshku tumani", "Romitan tumani", "Shofirkon tumani", "Qorovulbozor tumani", "Qorako‘l tumani", "G‘ijduvon tumani"],
+            "Jizzax viloyati": ["Jizzax shahri", "Arnasoy tumani", "Baxmal tumani", "Do‘stlik tumani", "Zarbdor tumani", "Zafarobod tumani", "Zomin tumani", "Mirzacho‘l tumani", "Paxtakor tumani", "Forish tumani", "Sharof Rashidov tumani", "G‘allaorol tumani", "Yangiobod tumani"],
+            "Qashqadaryo viloyati": ["Qarshi shahri", "Shahrisabz shahri", "Dehqonobod tumani", "Kasbi tumani", "Kitob tumani", "Koson tumani", "Mirishkor tumani", "Muborak tumani", "Nishon tumani", "Chiroqchi tumani", "Shahrisabz tumani", "Yakkabog‘ tumani", "Qamashi tumani", "Qarshi tumani", "G‘uzor tumani"],
+            "Navoiy viloyati": ["Navoiy shahri", "Zarafshon shahri", "Karmana tumani", "Konimex tumani", "Navbahor tumani", "Nurota tumani", "Tomdi tumani", "Uchquduq tumani", "Xatirchi tumani", "Qiziltepa tumani"],
+            "Namangan viloyati": ["Namangan shahri", "Kosonsoy tumani", "Mingbuloq tumani", "Namangan tumani", "Norin tumani", "Pop tumani", "To‘raqo‘rg‘on tumani", "Uychi tumani", "Uchqo‘rg‘on tumani", "Chortoq tumani", "Chust tumani", "Yangiqo‘rg‘on tumani"],
+            "Samarqand viloyati": ["Samarqand shahri", "Kattaqo‘rg‘on shahri", "Bulung‘ur tumani", "Jomboy tumani", "Ishtixon tumani", "Kattaqo‘rg‘on tumani", "Narpay tumani", "Nurobod tumani", "Oqdaryo tumani", "Payariq tumani", "Pastdarg‘om tumani", "Paxtachi tumani", "Samarqand tumani", "Toyloq tumani", "Urgut tumani", "Qo‘shrabot tumani"],
+            "Surxondaryo viloyati": ["Termiz shahri", "Angor tumani", "Boysun tumani", "Denov tumani", "Jarqo‘rg‘on tumani", "Muzrobod tumani", "Oltinsoy tumani", "Sariosiyo tumani", "Termiz tumani", "Uzun tumani", "Sherobod tumani", "Sho‘rchi tumani", "Qiziriq tumani", "Qumqo‘rg‘on tumani"],
+            "Sirdaryo viloyati": ["Guliston shahri", "Yangiyer shahri", "Shirin shahri", "Boyovut tumani", "Guliston tumani", "Mirzaobod tumani", "Oqoltin tumani", "Sardoba tumani", "Sayxunobod tumani", "Sirdaryo tumani", "Xovos tumani"],
+            "Toshkent viloyati": ["Bekobod shahri", "Olmaliq shahri", "Ohangaron shahri", "Nurafshon shahri", "Chirchiq shahri", "Yangiyo‘l shahri", "Bekobod tumani", "Bo‘ka tumani", "Bo‘stonliq tumani", "Qibray tumani", "Quyi Chirchiq tumani", "Oqqo‘rg‘on tumani", "Ohangaron tumani", "Parkent tumani", "Piskent tumani", "Toshkent tumani", "Zangiota tumani", "O‘rta Chirchiq tumani", "Chinoz tumani", "Yuqori chirchiq tumani", "Yangiyo‘l tumani"],
+            "Farg‘ona viloyati": ["Farg‘ona shahri", "Marg‘ilon shahri", "Quvasoy shahri", "Qo‘qon shahri", "Beshariq tumani", "Bog‘dod tumani", "Buvayda tumani", "Dang‘ara tumani", "Yozyovon tumani", "Quva tumani", "Qo‘shtepa tumani", "Oltiariq tumani", "Rishton tumani", "So‘x tumani", "Toshloq tumani", "O‘zbekiston tumani", "Uchko‘prik tumani", "Farg‘ona tumani", "Furqat tumani"],
+            "Xorizm viloyati": ["Urganch shahri", "Xiva shahri", "Bog‘ot tumani", "Gurlan tumani", "Urganch tumani", "Xiva tumani", "Xonqa tumani", "Hazorasp tumani", "Shovot tumani", "Yangiariq tumani", "Yangibozor tumani", "Qo‘shko‘pir tumani"],
+            "Toshkent shahri": ["Bektemir tumani", "Mirzo Ulug‘bek tumani", "Mirobod tumani", "Olmazor tumani", "Sirg‘ali tumani", "Uchtepa tumani", "Chilonzor tumani", "Shayxontohur tumani", "Yunusobod tumani", "Yakkasaroy tumani", "Yashnobod tumani"]
+        };
+
+        // Dinamik tuman tanlash logikasi
+        const regionSelect = document.getElementById('regionSelect');
+        const districtSelect = document.getElementById('districtSelect');
+
+        regionSelect.addEventListener('change', (e) => {
+            const selectedRegion = e.target.value;
+            districtSelect.innerHTML = '<option value="">Tanlang...</option>';
+            
+            if (selectedRegion && regionsData[selectedRegion]) {
+                regionsData[selectedRegion].forEach(district => {
+                    const option = document.createElement('option');
+                    option.value = district;
+                    option.textContent = district;
+                    districtSelect.appendChild(option);
+                });
+            } else {
+                districtSelect.innerHTML = '<option value="">Avval viloyatni tanlang...</option>';
+            }
+        });
+
+        const initAuth = async () => {
+            try {
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+            } catch (err) { console.error("Auth error:", err); }
+        };
+
+        onAuthStateChanged(auth, (u) => { user = u; });
+        initAuth();
+
+        async function callGemini(prompt, systemPrompt = "") {
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    contents: [{ parts: [{ text: prompt }] }],
+                    systemInstruction: { parts: [{ text: systemPrompt }] }
+                })
+            });
+            const result = await response.json();
+            return result.candidates?.[0]?.content?.parts?.[0]?.text;
+        }
+
+        window.openAICounselor = () => document.getElementById('aiCounselorModal').classList.remove('hidden');
+        window.closeAICounselor = () => {
+            document.getElementById('aiCounselorModal').classList.add('hidden');
+            document.getElementById('aiCounselorResult').classList.add('hidden');
+            document.getElementById('aiInterests').value = '';
+        };
+
+        window.consultAI = async () => {
+            const btn = document.getElementById('aiConsultBtn');
+            const resultBox = document.getElementById('aiCounselorResult');
+            const interests = document.getElementById('aiInterests').value;
+            if (!interests.trim()) return;
+            btn.disabled = true;
+            btn.innerHTML = '<div class="loader"></div> Oylamoqda...';
+            resultBox.classList.add('hidden');
+            const sysPrompt = "Siz ISFT instituti qabul maslahatchisisiz. Mavjud yo'nalishlar asosida nomzodga qiziqishlariga mosini tavsiya qiling.";
+            try {
+                const response = await callGemini(`Mening qiziqishlarim: ${interests}. Menga qaysi yo'nalish mos?`, sysPrompt);
+                resultBox.innerText = response;
+                resultBox.classList.remove('hidden');
+            } catch (err) {
+                resultBox.innerText = "Sun'iy intellekt xizmati band.";
+                resultBox.classList.remove('hidden');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '✨ Maslahat olish';
+            }
+        };
+
+        const questionsBank = {
+            math: [
+                { q: "Kvadrat funksiyaning grafigi bo‘lgan parabola shoxlarining yo‘nalishi nimaga bog‘liq?", options: ["Ozod hadning ishorasiga", "Kvadrat oldidagi koeffitsientning ishorasiga", "Grafikning Oy o'qi bilan kesishish nuqtasiga"], correct: 1 },
+                { q: "Arifmetik progressiyada ayirma ($d$) musbat bo‘lsa, progressiya qanday xarakterga ega bo‘ladi?", options: ["Kamayuvchi", "O‘suvchi", "O‘zgarmas"], correct: 1 },
+                { q: "To‘g‘ri burchakli uchburchakning tomonlari orasidagi bog‘liqlikni o‘rgangan qadimgi yunon olimi kim?", options: ["Arximed", "Fales", "Pifagor"], correct: 2 },
+                { q: "Trigonometriyada burchakning sinusi deb nimaga aytiladi?", options: ["Qarshisidagi katetning gipotenuzaga nisbatiga", "Yopishgan katetning gipotenuzaga nisbatiga", "Ikki katetning o'zaro nisbatiga"], correct: 0 },
+                { q: "Vektorlar qachon qarama-qarshi yo'nalgan deyiladi?", options: ["Ular parallel va yo'nalishlari bir xil bo'lsa", "Ular parallel bo'lib, yo'nalishlari qarama-qarshi bo'lsa", "Ular o'zaro perpendikulyar bo'lsa"], correct: 1 },
+                { q: "Geometrik progressiyaning mahraji ($q$) birga teng bo‘lsa, u qanday progressiya bo‘ladi?", options: ["O‘suvchi", "O‘zgarmas (statsionar)", "Cheksiz kamayuvchi"], correct: 1 },
+                { q: "Sinuslar teoremasi asosan qanday maqsadlarda qo‘llaniladi?", options: ["Faqat to'g'ri burchakli uchburchaklarni yechishda", "Ixtiyoriy uchburchakning tomonlari va burchaklarini topishda", "Faqat yuzani hisoblashda"], correct: 1 },
+                { q: "Agar vektorlarning skalyar ko‘paytmasi nolga teng bo‘lsa, bu vektorlar qanday joylashgan?", options: ["Parallel", "Ustma-ust", "Perpendikulyar"], correct: 2 },
+                { q: "Kvadrat tenglamaning diskriminanti noldan kichik bo‘lsa, u nechta haqiqiy ildizga ega?", options: ["Ildizga ega emas", "Bitta ildizga ega", "Ikkita ildizga ega"], correct: 0 },
+                { q: "Doira va aylananing farqi nimada?", options: ["Farqi yo'q, ikkalasi bir xil narsa", "Aylana — bu chiziq, doira — tekislikning aylana bilan chegaralangan qismi", "Aylana ichi to'la shakl, doira esa bo'sh chiziq"], correct: 1 },
+                { q: "Trigonometrik funksiyalardan qaysi biri doimo toq funksiya hisoblanadi?", options: ["Kosinus", "Sinus", "Hech qaysisi"], correct: 1 },
+                { q: "Muntazam ko'pburchak deb qanday shaklga aytiladi?", options: ["Faqat burchaklari teng bo'lgan shaklga", "Tomonlari va burchaklari teng bo'lgan qavariq ko'pburchakka", "Faqat tomonlari teng bo'lgan shaklga"], correct: 1 },
+                { q: "Ehtimollar nazariyasida \"muqarrar hodisa\"ning ehtimolligi raqamda qanday ifodalanadi?", options: ["0", "0,5", "1"], correct: 2 },
+                { q: "Ikki vektorning ayirmasi geometrik jihatdan qanday aniqlanadi?", options: ["Uchburchak yoki parallelogramm qoidasi bilan", "Faqat koordinatalarni qo'shish bilan", "Vektorlarni ko'paytirish bilan"], correct: 0 },
+                { q: "Funksiyaning aniqlanish sohasi deganda nima tushuniladi?", options: ["Argument ($x$) qabul qilishi mumkin bo'lgan qiymatlar to'plami", "Funksiya ($y$) qabul qiladigan natijalar to'plami", "Grafikning koordinata o'qlari bilan kesishish nuqtalari"], correct: 0 }
+            ],
+            uzb: [
+                { q: "Qo'shma gaplar necha turga bo'linadi?", options: ["2 turga", "3 turga", "4 turga"], correct: 1 },
+                { q: "Bog'lovchisiz qo'shma gapni toping.", options: ["Kun isidi va gullar ochildi.", "Qish keldi, qor yog'di.", "Agar darsingni qilsang, ko'chaga chiqasan."], correct: 1 },
+                { q: "\"Chunki, zero, negaki\" qaysi bog'lovchi turiga kiradi?", options: ["Sabab bog'lovchisi", "Shart bog'lovchisi", "Zidlov bog'lovchisi"], correct: 0 },
+                { q: "Ko'chirma gapli gapda muallif gapi ko'chirma gapdan oldin kelsa, qaysi tinish belgisi qo'yiladi?", options: ["Tirik (—)", "Ikki nuqta (:)", "Nuqtali vergul (;)"], correct: 1 },
+                { q: "Egasiz gapni aniqlang.", options: ["Bahor keldi.", "Senga aytishdi.", "Men maktabga bordim."], correct: 1 },
+                { q: "\"Hamma\", \"har kim\", \"barcha\" qaysi olmosh turiga kiradi?", options: ["Belgilash olmoshi", "Bo'lishsizlik olmoshi", "Ko'rsatish olmoshi"], correct: 0 },
+                { q: "Sodda gapning turlari necha xil?", options: ["Bir tarkibli va ikki tarkibli", "Faqat darak gaplar", "Faqat so'roq gaplar"], correct: 0 },
+                { q: "Ritmli nutq nima deb ataladi?", options: ["She'r", "Hikoya", "Maqola"], correct: 0 },
+                { q: "Nutq uslublari nechta?", options: ["3 ta", "5 ta", "6 ta"], correct: 1 },
+                { q: "Ilmiy uslubga xos xususiyatni toping.", options: ["Aniqlik va mantiqiylik", "His-hayajonli so'zlar", "Sheva so'zlarni qo'llash"], correct: 0 },
+                { q: "\"Ma'rifat\" so'zining asosi qaysi tildan olingan?", options: ["Fors", "Arab", "Turkiy"], correct: 1 },
+                { q: "Kirish so'zlar qatnashgan gapni toping.", options: ["Albatta, biz g'alaba qozonamiz.", "U maktabga bordi.", "Olma juda shirin ekan."], correct: 0 },
+                { q: "Vatandosh so'zidagi \"-dosh\" qo'shimchasining turi?", options: ["So'z yasovchi", "Shakl yasovchi", "Lug'aviy shakl yasovchi"], correct: 0 },
+                { q: "Undalmali gapni toping.", options: ["Bolalar, darsga tayyormisiz?", "Ular darsga kelishdi.", "Bahor juda go'zal fasl."], correct: 0 },
+                { q: "O'zbek tili qaysi tillar oilasiga kiradi?", options: ["Hind-yevropa", "Oltoy tillar oilasi", "Som-hom tillar oilasi"], correct: 1 }
+            ],
+            eng: [
+                { q: "If it rains, we ___ at home.", options: ["stay", "will stay", "would stay"], correct: 1 },
+                { q: "I have been learning English ___ 5 years.", options: ["for", "since", "at"], correct: 0 },
+                { q: "The bridge ___ in 1990.", options: ["was built", "built", "is built"], correct: 0 },
+                { q: "I am interested ___ reading books.", options: ["at", "on", "in"], correct: 2 },
+                { q: "Which one is a synonym of \"Famous\"?", options: ["Well-known", "Quiet", "Unknown"], correct: 0 },
+                { q: "She said that she ___ busy.", options: ["is", "was", "will be"], correct: 1 },
+                { q: "I ___ my homework yet.", options: ["haven't finished", "didn't finish", "don't finish"], correct: 0 },
+                { q: "If I ___ you, I would go there.", options: ["am", "was", "were"], correct: 2 },
+                { q: "The person ___ lives next door is a doctor.", options: ["which", "who", "whose"], correct: 1 },
+                { q: "Passive Voice: \"He cleans the room.\"", options: ["The room is cleaned by him.", "The room was cleaned by him.", "The room has been cleaned."], correct: 0 },
+                { q: "\"Environment\" means...", options: ["Atrof-muhit", "Texnologiya", "Sog'liqni saqlash"], correct: 0 },
+                { q: "Which auxiliary verb is used for Present Perfect?", options: ["do/does", "have/has", "am/is/are"], correct: 1 },
+                { q: "\"To provide\" means...", options: ["Ta'minlamoq", "Sotib olmoq", "Ta'mirlamoq"], correct: 0 },
+                { q: "I enjoy ___ music.", options: ["to listen", "listening", "listen"], correct: 1 },
+                { q: "Comparative form of \"Good\":", options: ["Gooder", "Best", "Better"], correct: 2 }
+            ]
+        };
+
+        let selectedQuestions = [];
+        const regForm = document.getElementById('registrationForm');
+        const regSection = document.getElementById('registrationSection');
+        const testSection = document.getElementById('testSection');
+        const resultSection = document.getElementById('resultSection');
+        const qContainer = document.getElementById('questionsContainer');
+
+        const phoneInputs = [document.getElementById('studentPhone'), document.getElementById('parentPhone')];
+        phoneInputs.forEach(input => {
+            input.addEventListener('input', (e) => {
+                let val = e.target.value.replace(/\D/g, '');
+                if (val.startsWith('998')) val = val.substring(3);
+                let res = '+998 ';
+                if (val.length > 0) res += val.substring(0, 2);
+                if (val.length > 2) res += ' ' + val.substring(2, 5);
+                if (val.length > 5) res += '-' + val.substring(5, 7);
+                if (val.length > 7) res += '-' + val.substring(7, 9);
+                e.target.value = res;
+            });
+        });
+
+        document.getElementById('passport').addEventListener('input', (e) => {
+            e.target.value = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 9);
+        });
+
+        regForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const fd = new FormData(regForm);
+            userData = Object.fromEntries(fd.entries());
+            const pick = (arr) => arr.sort(() => Math.random() - 0.5).slice(0, 5);
+            selectedQuestions = [
+                ...pick(questionsBank.math).map(q => ({...q, category: 'Matematika'})),
+                ...pick(questionsBank.uzb).map(q => ({...q, category: 'Ona tili'})),
+                ...pick(questionsBank.eng).map(q => ({...q, category: 'Ingliz tili'}))
+            ];
+            renderQuestions();
+            regSection.classList.add('hidden');
+            testSection.classList.remove('hidden');
+            window.scrollTo(0, 0);
+        });
+
+        function renderQuestions() {
+            qContainer.innerHTML = selectedQuestions.map((item, idx) => `
+                <div class="test-card" id="q-block-${idx}">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="bg-[#fff0f5] text-[#8b003d] px-2 py-0.5 rounded text-[10px] font-bold uppercase">${item.category}</span>
+                        <span class="text-gray-400 text-sm">Savol #${idx + 1}</span>
+                    </div>
+                    <p class="text-lg font-medium text-gray-800 mb-4">${item.q}</p>
+                    <div class="space-y-3">
+                        ${item.options.map((opt, oIdx) => `
+                            <div class="relative">
+                                <input type="radio" name="q-${idx}" id="q-${idx}-o-${oIdx}" value="${oIdx}" class="peer hidden" required>
+                                <label for="q-${idx}-o-${oIdx}" class="test-option block p-4 border-2 border-gray-100 rounded-xl cursor-pointer transition-all hover:border-[#ffc1da] peer-checked:border-[#8b003d] peer-checked:bg-[#fff0f5] text-gray-700">
+                                    <span class="inline-block w-6 h-6 border rounded-full mr-3 text-center text-xs leading-5 font-bold peer-checked:bg-[#8b003d] peer-checked:text-white">${String.fromCharCode(65 + oIdx)}</span>
+                                    ${opt}
+                                </label>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+            const radios = qContainer.querySelectorAll('input[type="radio"]');
+            radios.forEach(r => r.addEventListener('change', () => {
+                const answered = new Set([...qContainer.querySelectorAll('input[type="radio"]:checked')].map(r => r.name)).size;
+                document.getElementById('progressText').innerText = `Jarayon: ${answered}/15`;
+            }));
+        }
+
+        function createConfetti() {
+            const container = document.getElementById('confettiContainer');
+            const colors = ['#ffd700', '#8b003d', '#5c0028', '#ff4d4d', '#ffffff'];
+            for(let i=0; i<100; i++) {
+                const p = document.createElement('div');
+                p.className = 'confetti-piece';
+                p.style.left = Math.random() * 100 + 'vw';
+                p.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                p.style.animationDelay = Math.random() * 3 + 's';
+                p.style.width = Math.random() * 10 + 5 + 'px';
+                p.style.height = p.style.width;
+                container.appendChild(p);
+            }
+        }
+
+        document.getElementById('finishTestBtn').addEventListener('click', async () => {
+            const answers = qContainer.querySelectorAll('input[type="radio"]:checked');
+            if (answers.length < 15) { alert("Iltimos, barcha savollarga javob bering!"); return; }
+            if (!user) await initAuth();
+            if (!user) return alert("Xatolik: Autentifikatsiya.");
+            document.getElementById('finishTestBtn').disabled = true;
+            document.getElementById('finishTestBtn').innerText = "Natijalar yuborilmoqda...";
+            let score = 0;
+            answers.forEach(ans => {
+                const qIdx = parseInt(ans.name.split('-')[1]);
+                if (parseInt(ans.value) === selectedQuestions[qIdx].correct) score++;
+            });
+            const cleanPhone = (p) => p.replace('+', '').replace(/\s/g, '').replace(/-/g, '').trim();
+            const finalData = {
+                ...userData,
+                studentPhone: cleanPhone(userData.studentPhone),
+                parentPhone: cleanPhone(userData.parentPhone),
+                score: score,
+                timestamp: serverTimestamp()
+            };
+            try {
+                await Promise.all([
+                    fetch(scriptURL, { method: 'POST', body: new URLSearchParams(finalData) }),
+                    addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'applications'), finalData)
+                ]);
+                testSection.classList.add('hidden');
+                resultSection.classList.remove('hidden');
+                const firstName = userData.fullName.split(' ')[1] || userData.fullName.split(' ')[0];
+                document.getElementById('congratsText').innerHTML = `Hurmatli <b>${firstName}</b>, siz institutning <b>${userData.major}</b> (${userData.studyType}) yo'nalishiga muvaffaqiyatli qabul qilindingiz!`;
+                createConfetti();
+                window.scrollTo(0, 0);
+            } catch (err) {
+                console.error(err);
+                alert("Xatolik yuz berdi.");
+                document.getElementById('finishTestBtn').disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
