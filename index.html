@@ -37,6 +37,16 @@
         }
         .animate-acceptance { animation: fadeInScale 0.6s ease-out forwards; }
         
+        /* Confetti Effect */
+        .confetti-piece {
+            position: absolute; width: 10px; height: 10px; background: #ffd700; top: -10px;
+            opacity: 0; animation: confetti-fall 3s linear infinite;
+        }
+        @keyframes confetti-fall {
+            0% { top: -10px; opacity: 1; transform: translateX(0) rotate(0deg); }
+            100% { top: 100vh; opacity: 0; transform: translateX(100px) rotate(360deg); }
+        }
+
         .loader {
             border: 2px solid #f3f3f3;
             border-top: 2px solid #ffffff;
@@ -70,7 +80,7 @@
             <p class="text-pink-100 text-sm mt-1 opacity-80">Ma'lumotlaringizni kiriting va imtihonni boshlang</p>
         </div>
 
-        <form id="registrationForm" class="p-10 space-y-7">
+        <form id="registrationForm" class="p-10 space-y-7 text-center">
             <div class="space-y-2">
                 <label class="block text-xs font-black text-gray-400 uppercase tracking-widest">1. To'liq ism-sharifingiz <span class="text-red-500">*</span></label>
                 <input type="text" name="fullName" required placeholder="Masalan: Azizov Anvar Abdukarimovich" class="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl form-input font-medium text-center">
@@ -79,13 +89,13 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="space-y-2">
                     <label class="block text-xs font-black text-gray-400 uppercase tracking-widest">2. Viloyat <span class="text-red-500">*</span></label>
-                    <select id="regionSelect" name="region" required class="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl form-input font-medium appearance-none">
+                    <select id="regionSelect" name="region" required class="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl form-input font-medium appearance-none text-center">
                         <option value="">Tanlang...</option>
                     </select>
                 </div>
                 <div class="space-y-2">
                     <label class="block text-xs font-black text-gray-400 uppercase tracking-widest">Tuman (Shahar) <span class="text-red-500">*</span></label>
-                    <select id="districtSelect" name="district" required class="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl form-input font-medium appearance-none">
+                    <select id="districtSelect" name="district" required class="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl form-input font-medium appearance-none text-center">
                         <option value="">Viloyatni tanlang...</option>
                     </select>
                 </div>
@@ -93,39 +103,39 @@
 
             <div class="space-y-2">
                 <label class="block text-xs font-black text-gray-400 uppercase tracking-widest">3. Ta'lim muassasasi <span class="text-red-500">*</span></label>
-                <input type="text" name="school" required placeholder="Maktab, litsey yoki kollej nomi" class="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl form-input font-medium">
+                <input type="text" name="school" required placeholder="Maktab, litsey yoki kollej nomi" class="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl form-input font-medium text-center">
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="space-y-2">
                     <label class="block text-xs font-black text-gray-400 uppercase tracking-widest">4. Telefoningiz <span class="text-red-500">*</span></label>
-                    <input type="tel" id="studentPhone" name="studentPhone" required value="+998 " class="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl form-input font-medium">
+                    <input type="tel" id="studentPhone" name="studentPhone" required value="+998 " class="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl form-input font-medium text-center">
                 </div>
                 <div class="space-y-2">
                     <label class="block text-xs font-black text-gray-400 uppercase tracking-widest">5. Ota-ona raqami <span class="text-red-500">*</span></label>
-                    <input type="tel" id="parentPhone" name="parentPhone" required value="+998 " class="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl form-input font-medium">
+                    <input type="tel" id="parentPhone" name="parentPhone" required value="+998 " class="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl form-input font-medium text-center">
                 </div>
             </div>
 
             <div class="space-y-2">
                 <label class="block text-xs font-black text-gray-400 uppercase tracking-widest">6. Pasport (ID karta) <span class="text-red-500">*</span></label>
-                <input type="text" id="passport" name="passport" required placeholder="AA1234567" class="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl form-input font-medium uppercase tracking-widest">
+                <input type="text" id="passport" name="passport" required placeholder="AA1234567" class="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl form-input font-medium uppercase tracking-widest text-center">
             </div>
 
             <div class="space-y-4">
-                <div class="flex justify-between items-center">
+                <div class="flex justify-between items-center px-2">
                     <label class="block text-xs font-black text-gray-400 uppercase tracking-widest">7. Yo'nalish <span class="text-red-500">*</span></label>
                     <button type="button" onclick="toggleAIModal()" class="text-[10px] font-bold text-burgundy bg-pink-50 px-2 py-1 rounded-lg hover:bg-pink-100 transition-colors uppercase">
                         ✨ AI Maslahatchi
                     </button>
                 </div>
-                <select id="majorSelect" name="major" required class="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl form-input font-medium">
+                <select id="majorSelect" name="major" required class="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl form-input font-medium text-center appearance-none">
                     <option value="">Tanlang...</option>
                 </select>
             </div>
 
             <div class="space-y-2">
-                <label class="block text-xs font-black text-gray-400 uppercase tracking-widest">8. Ta'lim turi <span class="text-red-500">*</span></label>
+                <label class="block text-xs font-black text-gray-400 uppercase tracking-widest text-center">8. Ta'lim turi <span class="text-red-500">*</span></label>
                 <div class="grid grid-cols-2 gap-4">
                     <label class="relative cursor-pointer group">
                         <input type="radio" name="studyType" value="Kunduzgi" required class="peer hidden">
@@ -138,7 +148,7 @@
                 </div>
             </div>
 
-            <button type="submit" class="w-full py-5 gradient-bg text-white font-black text-lg rounded-[1.5rem] shadow-xl hover:shadow-2xl hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-3">
+            <button type="submit" class="w-full py-5 gradient-bg text-white font-black text-lg rounded-[1.5rem] shadow-xl hover:shadow-2xl hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-3 uppercase">
                 IMTIHONNI BOSHLASH <i class="fa-solid fa-play text-sm"></i>
             </button>
         </form>
@@ -210,11 +220,11 @@
                     
                     <div class="pt-6 border-t border-gray-200 grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div class="flex items-center gap-4 p-4 bg-white rounded-2xl shadow-sm border border-gray-100 text-left">
-                            <i class="fa-solid fa-paper-plane text-burgundy"></i>
+                            <i class="fa-solid fa-paper-plane text-burgundy text-xl"></i>
                             <span class="text-[10px] font-black text-gray-500 uppercase leading-none">Shartnoma tez orada yuboriladi</span>
                         </div>
                         <div class="flex items-center gap-4 p-4 bg-white rounded-2xl shadow-sm border border-gray-100 text-left">
-                            <i class="fa-solid fa-graduation-cap text-burgundy"></i>
+                            <i class="fa-solid fa-graduation-cap text-burgundy text-xl"></i>
                             <span class="text-[10px] font-black text-gray-500 uppercase leading-none">O'quv yili sentabrda boshlanadi</span>
                         </div>
                     </div>
@@ -232,6 +242,8 @@
         </div>
     </div>
 
+    <div id="confettiContainer" class="fixed inset-0 pointer-events-none z-[300]"></div>
+
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
@@ -242,7 +254,7 @@
         const apiKey = "";
         const appId = 'isft-admission';
 
-        // HUDUDLAR
+        // DATA
         const regionsData = {
             "Qoraqalpog‘iston Respublikasi": ["Nukus shahri", "Amudaryo tumani", "Beruniy tumani", "Kegeyli tumani", "Qanliko‘l tumani", "Qorao‘zak tumani", "Qo‘ng‘irot tumani", "Mo‘ynoq tumani", "Nukus tumani", "Taxiatosh tumani", "Taxtako‘pir tumani", "To‘rtko‘l tumani", "Xo‘jayli tumani", "Chimboy tumani", "Sho‘manoy tumani", "Ellikqal’a tumani"],
             "Andijon viloyati": ["Andijon shahri", "Xonabod shahri", "Andijon tumani", "Asaka tumani", "Baliqchi tumani", "Bo‘z tumani", "Buloqboshi tumani", "Jalaquduq tumani", "Izboskan tumani", "Qo‘rg‘ontepa tumani", "Marhamat tumani", "Oltinko‘l tumani", "Paxtaobod tumani", "Ulug‘nor tumani", "Xo‘jaobod tumani", "Shahrixon tumani"],
@@ -262,7 +274,7 @@
 
         const majors = ["Pedagogika", "Maktabgacha ta'lim", "Boshlang'ich ta'lim", "Psixologiya", "Xorijiy tel va adabiyoti: ingliz tili", "Filologiya va tillarni o'qitish", "Iqtisodiyot", "Bank ishi", "Marketing", "Axborot xavfsizligi", "Axborot tizimlari va texnologiyalari", "Xalqaro munosabatlar", "UOS BA (Hons) International Applied Accounting", "UOS BA (Hons) Business and Management", "Management and Managerial Accounting"];
 
-        // SAVOLLAR BANKI (Kengaytirilgan)
+        // SAVOLLAR BANKI
         const mathBank = [
             { q: "Kvadrat funksiyaning grafigi bo‘lgan parabola shoxlarining yo‘nalishi nimaga bog‘liq?", options: ["Ozod hadning ishorasiga", "Kvadrat oldidagi koeffitsientning ishorasiga", "Grafikning Oy o'qi bilan kesishish nuqtasiga"], correct: 1, cat: "Matematika" },
             { q: "Arifmetik progressiyada ayirma (d) musbat bo‘lsa, u qanday progressiya?", options: ["Kamayuvchi", "O‘suvchi", "O‘zgarmas"], correct: 1, cat: "Matematika" },
@@ -270,7 +282,8 @@
             { q: "Trigonometriyada sinush nima?", options: ["Qarshisidagi katetning gipotenuzaga nisbati", "Yopishgan katetning gipotenuzaga nisbati", "Katetlar nisbati"], correct: 0, cat: "Matematika" },
             { q: "Vektorlar qachon perpendikulyar bo'ladi?", options: ["Skalyar ko'paytma 0 bo'lsa", "Skalyar ko'paytma 1 bo'lsa", "Ayirma 0 bo'lsa"], correct: 0, cat: "Matematika" },
             { q: "Kvadrat tenglamaning diskriminanti 0 dan kichik bo'lsa, u nechta ildizga ega?", options: ["Ildizga ega emas", "Bitta", "Ikkita"], correct: 0, cat: "Matematika" },
-            { q: "Logarifm asosidagi son 1 ga teng bo'lishi mumkinmi?", options: ["Yo'q", "Ha", "Faqat musbat bo'lsa"], correct: 0, cat: "Matematika" }
+            { q: "Logarifm asosidagi son 1 ga teng bo'lishi mumkinmi?", options: ["Yo'q", "Ha", "Faqat musbat bo'lsa"], correct: 0, cat: "Matematika" },
+            { q: "Ikkita vektorning skalyar ko'paytmasi formula ko'rinishi?", options: ["|a|*|b|*cos(alpha)", "|a|+|b|", "a*b*sin(alpha)"], correct: 0, cat: "Matematika" }
         ];
 
         const nativeBank = [
@@ -278,7 +291,8 @@
             { q: "Bog'lovchisiz qo'shma gapni toping.", options: ["Kun isidi va gullar ochildi.", "Qish keldi, qor yog'di.", "Agar darsingni qilsang, ko'chaga chiqasan."], correct: 1, cat: "Ona tili" },
             { q: "\"Chunki, zero, negaki\" qaysi bog'lovchi turiga kiradi?", options: ["Sabab bog'lovchisi", "Shart bog'lovchisi", "Zidlov bog'lovchisi"], correct: 0, cat: "Ona tili" },
             { q: "Egasiz gapni aniqlang.", options: ["Bahor keldi.", "Senga aytishdi.", "Men bordim."], correct: 1, cat: "Ona tili" },
-            { q: "Nutq uslublari nechta?", options: ["3 ta", "5 ta", "6 ta"], correct: 1, cat: "Ona tili" }
+            { q: "Nutq uslublari nechta?", options: ["3 ta", "5 ta", "6 ta"], correct: 1, cat: "Ona tili" },
+            { q: "Asli o'zbekcha so'zlarni toping.", options: ["Qalam, kitob", "Ona, bola", "Dars, maktab"], correct: 1, cat: "Ona tili" }
         ];
 
         const englishBank = [
@@ -286,7 +300,8 @@
             { q: "I have been learning English ___ 5 years.", options: ["for", "since", "at"], correct: 0, cat: "Ingliz tili" },
             { q: "The bridge ___ in 1990.", options: ["was built", "built", "is built"], correct: 0, cat: "Ingliz tili" },
             { q: "I am interested ___ reading.", options: ["in", "at", "on"], correct: 0, cat: "Ingliz tili" },
-            { q: "She ___ to the market yesterday.", options: ["went", "go", "goes"], correct: 0, cat: "Ingliz tili" }
+            { q: "She ___ to the market yesterday.", options: ["went", "go", "goes"], correct: 0, cat: "Ingliz tili" },
+            { q: "I ___ finished my homework yet.", options: ["haven't", "hasn't", "didn't"], correct: 0, cat: "Ingliz tili" }
         ];
 
         // STATE
@@ -297,7 +312,7 @@
         let timeLeft = 900;
         let timerInterval;
 
-        // INIT SELECTS
+        // INIT UI
         const populateUI = () => {
             const regionSelect = document.getElementById('regionSelect');
             const majorSelect = document.getElementById('majorSelect');
@@ -315,7 +330,7 @@
             });
         };
 
-        regionSelect.addEventListener('change', (e) => {
+        document.getElementById('regionSelect').addEventListener('change', (e) => {
             const districtSelect = document.getElementById('districtSelect');
             const region = e.target.value;
             districtSelect.innerHTML = '<option value="">Tanlang...</option>';
@@ -375,13 +390,29 @@
             btn.innerHTML = 'Maslahat olish';
         };
 
+        // CONFETTI EFFECT
+        function createConfetti() {
+            const container = document.getElementById('confettiContainer');
+            const colors = ['#8b003d', '#5c0028', '#ffd700', '#ffffff', '#ff4d4d'];
+            for(let i = 0; i < 100; i++) {
+                const p = document.createElement('div');
+                p.className = 'confetti-piece';
+                p.style.left = Math.random() * 100 + 'vw';
+                p.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                p.style.animationDelay = Math.random() * 3 + 's';
+                p.style.width = Math.random() * 10 + 5 + 'px';
+                p.style.height = p.style.width;
+                container.appendChild(p);
+            }
+        }
+
         // TEST FLOW
         document.getElementById('registrationForm').addEventListener('submit', (e) => {
             e.preventDefault();
             const fd = new FormData(e.target);
             userData = Object.fromEntries(fd.entries());
             
-            // Generate 15 questions (5 each)
+            // 15 questions logic
             const pick = (arr, n) => [...arr].sort(() => Math.random() - 0.5).slice(0, n);
             currentQuestions = [
                 ...pick(mathBank, 5),
@@ -405,11 +436,10 @@
                         <span class="text-gray-400 text-xs">Savol #${i + 1}</span>
                     </div>
                     <h4 class="text-lg font-bold text-gray-800">${q.q}</h4>
-                    <div class="grid grid-cols-1 gap-3">
+                    <div class="grid grid-cols-1 gap-3 text-center">
                         ${q.options.map((opt, oIdx) => `
                             <button onclick="window.selectAnswer(${i}, ${oIdx})" id="q${i}_o${oIdx}" 
-                                class="q-opt-${i} p-4 text-left rounded-2xl border-2 border-gray-50 bg-gray-50 text-gray-600 hover:border-burgundy transition-all flex items-center gap-4">
-                                <span class="w-7 h-7 rounded-full border bg-white flex items-center justify-center font-bold text-xs">${String.fromCharCode(65 + oIdx)}</span>
+                                class="q-opt-${i} p-4 text-center rounded-2xl border-2 border-gray-50 bg-gray-50 text-gray-600 hover:border-burgundy transition-all font-semibold">
                                 ${opt}
                             </button>
                         `).join('')}
@@ -469,6 +499,8 @@
                 document.getElementById('testSection').classList.add('hidden');
                 document.getElementById('resultSection').classList.remove('hidden');
                 document.getElementById('successMsg').innerHTML = `Hurmatli <b>${userData.fullName.split(' ')[0]}</b>, siz institutning <b>${userData.major}</b> (${userData.studyType}) yo'nalishiga talabalikka muvaffaqiyatli qabul qilindingiz!`;
+                
+                createConfetti(); // Show celebratory animation
                 window.scrollTo(0, 0);
             } catch (e) { alert("Xatolik. Internetni tekshiring."); btn.disabled = false; }
         };
