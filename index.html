@@ -56,7 +56,7 @@
 <body class="min-h-screen flex flex-col items-center py-10 px-4 relative overflow-x-hidden">
 
     <div class="max-w-2xl w-full mb-10 text-center">
-        <h1 class="text-2xl md:text-3xl font-black text-[#5c0028] leading-tight uppercase tracking-tight">
+        <h1 class="text-2xl md:text-3xl font-black text-[#5c0028] leading-tight uppercase tracking-tight text-center">
             International School of Finance Technology and Science
         </h1>
         <div class="h-1 w-20 bg-burgundy mx-auto mt-4 rounded-full"></div>
@@ -73,7 +73,7 @@
         <form id="registrationForm" class="p-10 space-y-7">
             <div class="space-y-2">
                 <label class="block text-xs font-black text-gray-400 uppercase tracking-widest">1. To'liq ism-sharifingiz <span class="text-red-500">*</span></label>
-                <input type="text" name="fullName" required placeholder="Masalan: Azizov Anvar Abdukarimovich" class="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl form-input font-medium">
+                <input type="text" name="fullName" required placeholder="Masalan: Azizov Anvar Abdukarimovich" class="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl form-input font-medium text-center">
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -129,64 +129,63 @@
                 <div class="grid grid-cols-2 gap-4">
                     <label class="relative cursor-pointer group">
                         <input type="radio" name="studyType" value="Kunduzgi" required class="peer hidden">
-                        <div class="p-4 text-center border-2 border-gray-100 rounded-2xl font-bold text-gray-500 group-hover:bg-gray-50 peer-checked:border-burgundy peer-checked:bg-red-50 peer-checked:text-burgundy transition-all">Kunduzgi</div>
+                        <div class="p-4 text-center border-2 border-gray-100 rounded-2xl font-bold text-gray-500 group-hover:bg-gray-50 peer-checked:border-burgundy peer-checked:bg-red-50 peer-checked:text-burgundy transition-all text-sm uppercase">Kunduzgi</div>
                     </label>
                     <label class="relative cursor-pointer group">
                         <input type="radio" name="studyType" value="Masofaviy" required class="peer hidden">
-                        <div class="p-4 text-center border-2 border-gray-100 rounded-2xl font-bold text-gray-500 group-hover:bg-gray-50 peer-checked:border-burgundy peer-checked:bg-red-50 peer-checked:text-burgundy transition-all">Masofaviy</div>
+                        <div class="p-4 text-center border-2 border-gray-100 rounded-2xl font-bold text-gray-500 group-hover:bg-gray-50 peer-checked:border-burgundy peer-checked:bg-red-50 peer-checked:text-burgundy transition-all text-sm uppercase">Masofaviy</div>
                     </label>
                 </div>
             </div>
 
             <button type="submit" class="w-full py-5 gradient-bg text-white font-black text-lg rounded-[1.5rem] shadow-xl hover:shadow-2xl hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-3">
-                TESTNI BOSHLASH <i class="fa-solid fa-chevron-right text-sm"></i>
+                IMTIHONNI BOSHLASH <i class="fa-solid fa-play text-sm"></i>
             </button>
         </form>
     </div>
 
     <!-- AI COUNSELOR MODAL -->
-    <div id="aiModal" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-[200] hidden flex items-center justify-center p-6">
+    <div id="aiModal" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-[200] hidden flex items-center justify-center p-6 text-center">
         <div class="bg-white rounded-[2rem] max-w-md w-full p-8 shadow-2xl transform transition-all">
-            <div class="flex items-center gap-3 mb-6">
+            <div class="flex items-center justify-center gap-3 mb-6">
                 <div class="w-10 h-10 gradient-bg rounded-full flex items-center justify-center text-white">
                     <i class="fa-solid fa-robot"></i>
                 </div>
-                <h3 class="text-xl font-black text-burgundy">AI Maslahatchi</h3>
+                <h3 class="text-xl font-black text-burgundy uppercase">AI Maslahatchi</h3>
             </div>
-            <p class="text-sm text-gray-600 mb-6 leading-relaxed">Qaysi fanlar yoki sohalarga qiziqishingizni yozing (masalan: "Menga moliya va bank tizimi yoqadi"), AI sizga mos yo'nalishni tavsiya qiladi.</p>
-            <textarea id="aiInput" class="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl h-32 outline-none focus:ring-2 focus:ring-burgundy font-medium text-sm" placeholder="O'z qiziqishlaringizni yozing..."></textarea>
+            <textarea id="aiInput" class="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl h-32 outline-none focus:ring-2 focus:ring-burgundy font-medium text-sm text-center" placeholder="Qiziqishlaringizni yozing (matematika, moliya va h.k.)..."></textarea>
             
-            <div id="aiResult" class="mt-6 p-4 bg-red-50 border border-red-100 rounded-2xl text-xs italic text-gray-700 hidden animate-pulse"></div>
+            <div id="aiResult" class="mt-6 p-4 bg-red-50 border border-red-100 rounded-2xl text-xs italic text-gray-700 hidden"></div>
 
             <div class="mt-8 flex gap-3">
-                <button id="aiBtn" onclick="askAI()" class="flex-1 py-3 gradient-bg text-white font-bold rounded-xl shadow-lg hover:opacity-90 transition-opacity">Maslahat olish</button>
-                <button onclick="toggleAIModal()" class="flex-1 py-3 bg-gray-100 text-gray-600 font-bold rounded-xl hover:bg-gray-200 transition-colors">Yopish</button>
+                <button id="aiBtn" onclick="askAI()" class="flex-1 py-3 gradient-bg text-white font-bold rounded-xl shadow-lg hover:opacity-90">Maslahat</button>
+                <button onclick="toggleAIModal()" class="flex-1 py-3 bg-gray-100 text-gray-600 font-bold rounded-xl">Yopish</button>
             </div>
         </div>
     </div>
 
     <!-- 2-BOSQICH: TEST -->
     <div id="testSection" class="max-w-3xl w-full bg-white rounded-[2.5rem] shadow-2xl overflow-hidden border border-gray-100 hidden">
-        <div class="bg-burgundy p-6 text-white flex justify-between items-center sticky top-0 z-50 shadow-md">
+        <div class="bg-burgundy p-6 text-white flex justify-between items-center sticky top-0 z-50">
             <div class="flex items-center gap-3">
-                <i class="fa-solid fa-file-signature text-xl"></i>
-                <span class="font-black tracking-wider uppercase text-sm">Kirish Imtihoni</span>
+                <i class="fa-solid fa-file-signature"></i>
+                <span class="font-black uppercase text-sm tracking-widest">Kirish Imtihoni</span>
             </div>
             <div id="timer" class="bg-white/20 px-5 py-2 rounded-2xl font-mono text-sm font-bold border border-white/30">15:00</div>
         </div>
         
-        <div class="p-10 custom-scrollbar max-h-[70vh] overflow-y-auto space-y-12">
+        <div class="p-8 md:p-12 custom-scrollbar max-h-[70vh] overflow-y-auto space-y-12">
             <div id="questionsList" class="space-y-12"></div>
         </div>
 
         <div class="p-8 bg-gray-50 border-t flex flex-col md:flex-row items-center justify-between gap-6">
-            <div class="flex items-center gap-2">
+            <div class="flex items-center gap-3">
                 <div class="h-2 w-32 bg-gray-200 rounded-full overflow-hidden">
                     <div id="progressBar" class="h-full bg-burgundy transition-all duration-300" style="width: 0%"></div>
                 </div>
-                <span id="progressText" class="text-xs font-black text-gray-400 uppercase tracking-tighter">0 / 15 bajarildi</span>
+                <span id="progressText" class="text-[10px] font-black text-gray-400 uppercase">0 / 15 bajarildi</span>
             </div>
-            <button id="finishBtn" onclick="submitTest()" class="w-full md:w-auto px-12 py-4 gradient-bg text-white rounded-2xl font-black shadow-lg hover:shadow-2xl transition-all uppercase tracking-widest text-sm">
+            <button id="finishBtn" onclick="submitTest()" class="w-full md:w-auto px-12 py-4 gradient-bg text-white rounded-2xl font-black shadow-lg hover:shadow-2xl transition-all uppercase tracking-widest text-xs">
                 Testni yakunlash
             </button>
         </div>
@@ -195,61 +194,55 @@
     <!-- 3-BOSQICH: NATIJA -->
     <div id="resultSection" class="max-w-2xl w-full hidden">
         <div class="bg-white rounded-[3rem] shadow-2xl border-[12px] border-red-50 overflow-hidden animate-acceptance">
-            <div class="p-10 md:p-16 text-center space-y-8">
+            <div class="p-10 md:p-16 text-center space-y-10">
                 <div class="w-24 h-24 bg-green-50 text-green-600 rounded-full flex items-center justify-center mx-auto text-5xl shadow-inner border border-green-100">
                     <i class="fa-solid fa-award"></i>
                 </div>
                 
-                <div class="space-y-2">
-                    <h2 class="text-4xl font-black text-[#5c0028] tracking-tighter uppercase">Tabriklaymiz!</h2>
-                    <div class="h-1.5 w-20 bg-burgundy mx-auto rounded-full"></div>
-                </div>
+                <h2 class="text-4xl font-black text-[#5c0028] tracking-tighter uppercase">Tabriklaymiz!</h2>
                 
                 <p class="text-2xl font-bold text-gray-800 leading-tight">
-                    Siz <span class="text-burgundy uppercase block mt-3 underline decoration-red-200 decoration-8 underline-offset-4">International School of Finance Technology and Science</span> Institutiga muvaffaqiyatli qabul qilindingiz!
+                    Siz <span class="text-burgundy uppercase block mt-3 underline decoration-red-200 decoration-8 underline-offset-4">International School of Finance Technology and Science</span> Institutiga talabalikka muvaffaqiyatli qabul qilindingiz!
                 </p>
                 
-                <div class="p-8 bg-gray-50 rounded-[2.5rem] border border-gray-100 text-left space-y-6">
-                    <p id="successMsg" class="text-lg text-gray-600 italic leading-relaxed text-center"></p>
+                <div class="p-8 bg-gray-50 rounded-[2.5rem] border border-gray-100 space-y-6">
+                    <p id="successMsg" class="text-lg text-gray-600 italic leading-relaxed"></p>
                     
                     <div class="pt-6 border-t border-gray-200 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div class="flex items-center gap-4 p-4 bg-white rounded-2xl shadow-sm border border-gray-100">
+                        <div class="flex items-center gap-4 p-4 bg-white rounded-2xl shadow-sm border border-gray-100 text-left">
                             <i class="fa-solid fa-paper-plane text-burgundy"></i>
                             <span class="text-[10px] font-black text-gray-500 uppercase leading-none">Shartnoma tez orada yuboriladi</span>
                         </div>
-                        <div class="flex items-center gap-4 p-4 bg-white rounded-2xl shadow-sm border border-gray-100">
+                        <div class="flex items-center gap-4 p-4 bg-white rounded-2xl shadow-sm border border-gray-100 text-left">
                             <i class="fa-solid fa-graduation-cap text-burgundy"></i>
-                            <span class="text-[10px] font-black text-gray-500 uppercase leading-none">O'qish sentabrda boshlanadi</span>
+                            <span class="text-[10px] font-black text-gray-500 uppercase leading-none">O'quv yili sentabrda boshlanadi</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="pt-6 space-y-4">
                     <button onclick="window.print()" class="text-xs font-black text-burgundy hover:underline flex items-center justify-center gap-2 mx-auto tracking-widest uppercase">
-                        <i class="fa-solid fa-file-pdf"></i> Ma'lumotnomani yuklab olish
+                        <i class="fa-solid fa-download"></i> Ma'lumotnomani saqlash (PDF)
                     </button>
                     <button onclick="window.location.reload()" class="w-full py-5 bg-[#5c0028] text-white rounded-2xl font-black shadow-xl hover:bg-[#8b003d] transition-all uppercase tracking-widest">
-                        Asosiy sahifa
+                        Asosiy sahifaga qaytish
                     </button>
                 </div>
             </div>
         </div>
     </div>
 
-    <div id="confetti" class="fixed inset-0 pointer-events-none z-[300]"></div>
-
-    <!-- SCRIPTS -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
         import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 
-        // GLOBAL CONFIG
+        // CONFIG
         const scriptURL = 'https://script.google.com/macros/s/AKfycbxonmVFGH9gTsQHyhJPyYykE5k1357KcRnRJkeMzFSPJlqa8ewKfF1EBl-Qo832j-21/exec';
         const apiKey = "";
         const appId = 'isft-admission';
 
-        // DATA
+        // HUDUDLAR
         const regionsData = {
             "Qoraqalpog‘iston Respublikasi": ["Nukus shahri", "Amudaryo tumani", "Beruniy tumani", "Kegeyli tumani", "Qanliko‘l tumani", "Qorao‘zak tumani", "Qo‘ng‘irot tumani", "Mo‘ynoq tumani", "Nukus tumani", "Taxiatosh tumani", "Taxtako‘pir tumani", "To‘rtko‘l tumani", "Xo‘jayli tumani", "Chimboy tumani", "Sho‘manoy tumani", "Ellikqal’a tumani"],
             "Andijon viloyati": ["Andijon shahri", "Xonabod shahri", "Andijon tumani", "Asaka tumani", "Baliqchi tumani", "Bo‘z tumani", "Buloqboshi tumani", "Jalaquduq tumani", "Izboskan tumani", "Qo‘rg‘ontepa tumani", "Marhamat tumani", "Oltinko‘l tumani", "Paxtaobod tumani", "Ulug‘nor tumani", "Xo‘jaobod tumani", "Shahrixon tumani"],
@@ -269,14 +262,31 @@
 
         const majors = ["Pedagogika", "Maktabgacha ta'lim", "Boshlang'ich ta'lim", "Psixologiya", "Xorijiy tel va adabiyoti: ingliz tili", "Filologiya va tillarni o'qitish", "Iqtisodiyot", "Bank ishi", "Marketing", "Axborot xavfsizligi", "Axborot tizimlari va texnologiyalari", "Xalqaro munosabatlar", "UOS BA (Hons) International Applied Accounting", "UOS BA (Hons) Business and Management", "Management and Managerial Accounting"];
 
-        const questions = [
+        // SAVOLLAR BANKI (Kengaytirilgan)
+        const mathBank = [
             { q: "Kvadrat funksiyaning grafigi bo‘lgan parabola shoxlarining yo‘nalishi nimaga bog‘liq?", options: ["Ozod hadning ishorasiga", "Kvadrat oldidagi koeffitsientning ishorasiga", "Grafikning Oy o'qi bilan kesishish nuqtasiga"], correct: 1, cat: "Matematika" },
             { q: "Arifmetik progressiyada ayirma (d) musbat bo‘lsa, u qanday progressiya?", options: ["Kamayuvchi", "O‘suvchi", "O‘zgarmas"], correct: 1, cat: "Matematika" },
             { q: "To‘g‘ri burchakli uchburchak tomonlari orasidagi bog‘liqlikni kim o‘rgangan?", options: ["Arximed", "Fales", "Pifagor"], correct: 2, cat: "Matematika" },
             { q: "Trigonometriyada sinush nima?", options: ["Qarshisidagi katetning gipotenuzaga nisbati", "Yopishgan katetning gipotenuzaga nisbati", "Katetlar nisbati"], correct: 0, cat: "Matematika" },
+            { q: "Vektorlar qachon perpendikulyar bo'ladi?", options: ["Skalyar ko'paytma 0 bo'lsa", "Skalyar ko'paytma 1 bo'lsa", "Ayirma 0 bo'lsa"], correct: 0, cat: "Matematika" },
+            { q: "Kvadrat tenglamaning diskriminanti 0 dan kichik bo'lsa, u nechta ildizga ega?", options: ["Ildizga ega emas", "Bitta", "Ikkita"], correct: 0, cat: "Matematika" },
+            { q: "Logarifm asosidagi son 1 ga teng bo'lishi mumkinmi?", options: ["Yo'q", "Ha", "Faqat musbat bo'lsa"], correct: 0, cat: "Matematika" }
+        ];
+
+        const nativeBank = [
             { q: "Qo'shma gaplar necha turga bo'linadi?", options: ["2 turga", "3 turga", "4 turga"], correct: 1, cat: "Ona tili" },
-            { q: "If it rains, we ___ at home.", options: ["stay", "will stay", "would stay"], correct: 1, cat: "Ingliz tili" }
-            // Small sample for stability; can be expanded.
+            { q: "Bog'lovchisiz qo'shma gapni toping.", options: ["Kun isidi va gullar ochildi.", "Qish keldi, qor yog'di.", "Agar darsingni qilsang, ko'chaga chiqasan."], correct: 1, cat: "Ona tili" },
+            { q: "\"Chunki, zero, negaki\" qaysi bog'lovchi turiga kiradi?", options: ["Sabab bog'lovchisi", "Shart bog'lovchisi", "Zidlov bog'lovchisi"], correct: 0, cat: "Ona tili" },
+            { q: "Egasiz gapni aniqlang.", options: ["Bahor keldi.", "Senga aytishdi.", "Men bordim."], correct: 1, cat: "Ona tili" },
+            { q: "Nutq uslublari nechta?", options: ["3 ta", "5 ta", "6 ta"], correct: 1, cat: "Ona tili" }
+        ];
+
+        const englishBank = [
+            { q: "If it rains, we ___ at home.", options: ["stay", "will stay", "would stay"], correct: 1, cat: "Ingliz tili" },
+            { q: "I have been learning English ___ 5 years.", options: ["for", "since", "at"], correct: 0, cat: "Ingliz tili" },
+            { q: "The bridge ___ in 1990.", options: ["was built", "built", "is built"], correct: 0, cat: "Ingliz tili" },
+            { q: "I am interested ___ reading.", options: ["in", "at", "on"], correct: 0, cat: "Ingliz tili" },
+            { q: "She ___ to the market yesterday.", options: ["went", "go", "goes"], correct: 0, cat: "Ingliz tili" }
         ];
 
         // STATE
@@ -285,9 +295,10 @@
         let currentQuestions = [];
         let userAnswers = {};
         let timeLeft = 900;
+        let timerInterval;
 
-        // INIT UI
-        const populateSelects = () => {
+        // INIT SELECTS
+        const populateUI = () => {
             const regionSelect = document.getElementById('regionSelect');
             const majorSelect = document.getElementById('majorSelect');
             
@@ -304,7 +315,7 @@
             });
         };
 
-        document.getElementById('regionSelect').addEventListener('change', (e) => {
+        regionSelect.addEventListener('change', (e) => {
             const districtSelect = document.getElementById('districtSelect');
             const region = e.target.value;
             districtSelect.innerHTML = '<option value="">Tanlang...</option>';
@@ -345,7 +356,7 @@
             btn.disabled = true;
             btn.innerHTML = '<div class="loader"></div>';
             resBox.classList.remove('hidden');
-            resBox.innerText = "Sun'iy intellekt javob tayyorlamoqda...";
+            resBox.innerText = "Tahlil qilinmoqda...";
 
             try {
                 const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
@@ -353,27 +364,32 @@
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        contents: [{ parts: [{ text: `Mening qiziqishlarim: ${input}. ISFT institutidagi yo'nalishlardan qaysi biri menga mos? Qisqa javob bering.` }] }],
-                        systemInstruction: { parts: [{ text: "Siz ISFT instituti maslahatchisisiz. Faqat o'zbek tilida, do'stona ruhda maslahat bering." }] }
+                        contents: [{ parts: [{ text: `Mening qiziqishlarim: ${input}. ISFT institutidagi yo'nalishlardan qaysi biri menga mos?` }] }],
+                        systemInstruction: { parts: [{ text: "Siz ISFT maslahatchisisiz. Faqat o'zbek tilida qisqa javob bering." }] }
                     })
                 });
                 const data = await response.json();
-                resBox.innerText = data.candidates?.[0]?.content?.parts?.[0]?.text || "Kechirasiz, xatolik.";
-                resBox.classList.remove('animate-pulse');
-            } catch (err) { resBox.innerText = "Xizmat vaqtincha band."; }
+                resBox.innerText = data.candidates?.[0]?.content?.parts?.[0]?.text || "Maslahat olib bo'lmadi.";
+            } catch (err) { resBox.innerText = "Xatolik."; }
             btn.disabled = false;
             btn.innerHTML = 'Maslahat olish';
         };
 
-        // TEST LOGIC
+        // TEST FLOW
         document.getElementById('registrationForm').addEventListener('submit', (e) => {
             e.preventDefault();
             const fd = new FormData(e.target);
             userData = Object.fromEntries(fd.entries());
             
-            currentQuestions = [...questions].sort(() => Math.random() - 0.5).slice(0, 15);
-            renderQuestions();
+            // Generate 15 questions (5 each)
+            const pick = (arr, n) => [...arr].sort(() => Math.random() - 0.5).slice(0, n);
+            currentQuestions = [
+                ...pick(mathBank, 5),
+                ...pick(nativeBank, 5),
+                ...pick(englishBank, 5)
+            ];
             
+            renderQuestions();
             document.getElementById('registrationSection').classList.add('hidden');
             document.getElementById('testSection').classList.remove('hidden');
             startTimer();
@@ -392,7 +408,7 @@
                     <div class="grid grid-cols-1 gap-3">
                         ${q.options.map((opt, oIdx) => `
                             <button onclick="window.selectAnswer(${i}, ${oIdx})" id="q${i}_o${oIdx}" 
-                                class="q-opt-${i} p-4 text-left rounded-2xl border-2 border-gray-50 bg-gray-50 text-gray-600 hover:border-burgundy/30 transition-all flex items-center gap-4">
+                                class="q-opt-${i} p-4 text-left rounded-2xl border-2 border-gray-50 bg-gray-50 text-gray-600 hover:border-burgundy transition-all flex items-center gap-4">
                                 <span class="w-7 h-7 rounded-full border bg-white flex items-center justify-center font-bold text-xs">${String.fromCharCode(65 + oIdx)}</span>
                                 ${opt}
                             </button>
@@ -407,31 +423,29 @@
             document.querySelectorAll(`.q-opt-${qIdx}`).forEach(btn => {
                 btn.classList.remove('border-burgundy', 'bg-red-50', 'text-burgundy');
             });
-            const selected = document.getElementById(`q${qIdx}_o${oIdx}`);
-            selected.classList.add('border-burgundy', 'bg-red-50', 'text-burgundy');
+            document.getElementById(`q${qIdx}_o${oIdx}`).classList.add('border-burgundy', 'bg-red-50', 'text-burgundy');
             
-            const count = Object.keys(userAnswers).length;
-            document.getElementById('progressBar').style.width = `${(count / 15) * 100}%`;
-            document.getElementById('progressText').innerText = `${count} / 15 bajarildi`;
+            const done = Object.keys(userAnswers).length;
+            document.getElementById('progressBar').style.width = `${(done / 15) * 100}%`;
+            document.getElementById('progressText').innerText = `${done} / 15 bajarildi`;
         };
 
         const startTimer = () => {
-            const timerEl = document.getElementById('timer');
-            const interval = setInterval(() => {
+            timerInterval = setInterval(() => {
                 timeLeft--;
                 const m = Math.floor(timeLeft / 60);
                 const s = timeLeft % 60;
-                timerEl.innerText = `${m}:${s < 10 ? '0' : ''}${s}`;
+                document.getElementById('timer').innerText = `${m}:${s < 10 ? '0' : ''}${s}`;
                 if (timeLeft <= 0) {
-                    clearInterval(interval);
-                    window.submitTest();
+                    clearInterval(timerInterval);
+                    submitTest();
                 }
             }, 1000);
         };
 
         window.submitTest = async () => {
-            const count = Object.keys(userAnswers).length;
-            if (count < 15 && timeLeft > 0) return alert("Iltimos, barcha savollarga javob bering!");
+            if (Object.keys(userAnswers).length < 15 && timeLeft > 0) return alert("Hamma savollarga javob bering!");
+            clearInterval(timerInterval);
 
             const btn = document.getElementById('finishBtn');
             btn.disabled = true;
@@ -440,7 +454,7 @@
             let score = 0;
             currentQuestions.forEach((q, i) => { if (userAnswers[i] === q.correct) score++; });
 
-            const finalData = {
+            const payload = {
                 ...userData,
                 studentPhone: userData.studentPhone.replace(/\D/g, ''),
                 parentPhone: userData.parentPhone.replace(/\D/g, ''),
@@ -449,26 +463,25 @@
             };
 
             try {
-                await fetch(scriptURL, { method: 'POST', body: new URLSearchParams(finalData) });
-                if (db) await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'applications'), finalData);
+                await fetch(scriptURL, { method: 'POST', body: new URLSearchParams(payload) });
+                if (db) await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'applications'), payload);
                 
                 document.getElementById('testSection').classList.add('hidden');
                 document.getElementById('resultSection').classList.remove('hidden');
-                document.getElementById('successMsg').innerHTML = `Hurmatli <b>${userData.fullName.split(' ')[0]}</b>, siz institutning <b>${userData.major}</b> (${userData.studyType}) yo'nalishiga muvaffaqiyatli talabalikka qabul qilindingiz!`;
+                document.getElementById('successMsg').innerHTML = `Hurmatli <b>${userData.fullName.split(' ')[0]}</b>, siz institutning <b>${userData.major}</b> (${userData.studyType}) yo'nalishiga talabalikka muvaffaqiyatli qabul qilindingiz!`;
                 window.scrollTo(0, 0);
             } catch (e) { alert("Xatolik. Internetni tekshiring."); btn.disabled = false; }
         };
 
-        // FIREBASE BOOT
         const start = async () => {
-            populateSelects();
+            populateUI();
             try {
                 const config = JSON.parse(__firebase_config);
                 const app = initializeApp(config);
                 db = getFirestore(app);
                 auth = getAuth(app);
                 await signInAnonymously(auth);
-            } catch (e) { console.warn("GitHub offline mode active."); }
+            } catch (e) {}
         };
         start();
     </script>
